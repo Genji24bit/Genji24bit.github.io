@@ -1,0 +1,20 @@
+{
+  "title": "Genji10",
+  "subtitle": "记录思考，分享创造",
+  "description": "Genji10 的个人博客 · 设计与技术的交汇点",
+  "avatar": "/images/avatar.png",
+  "footerBio": "热爱设计与技术的创造者。在这里记录思考、分享资源，与有趣的灵魂相遇。",
+  "githubUser": "Genji24bit",
+  "githubRepo": "Genji24bit",
+  "social": {
+    "github": "https://github.com/Genji24bit",
+    "email": "genji10@example.com"
+  },
+  "nav": [
+    { "label": "首页", "path": "/", "icon": "home" },
+    { "label": "博客", "path": "/blog", "icon": "book" },
+    { "label": "资源", "path": "/resources", "icon": "download" },
+    { "label": "留言", "path": "/guestbook", "icon": "message" },
+    { "label": "关于", "path": "/about", "icon": "user" }
+  ]
+}

@@ -1,0 +1,135 @@
+<%- include('partials/head', { pageTitle: '留言板' }) %>
+
+<section class="page-hero">
+  <div class="container">
+    <div class="page-hero-content" data-reveal>
+      <span class="section-tag">Guestbook</span>
+      <h1 class="page-hero-title">留言板</h1>
+      <p class="page-hero-desc">留下你的足迹 · 每个声音都值得被听见</p>
+    </div>
+  </div>
+</section>
+
+<section class="section">
+  <div class="container">
+    <div class="guestbook-layout">
+      <!-- 留言表单 -->
+      <div class="guestbook-form-wrapper" data-reveal>
+        <h2 class="guestbook-form-title">写留言</h2>
+        <form class="guestbook-form" id="guestbookForm">
+          <div class="form-group">
+            <label class="form-label" for="gbName">昵称 *</label>
+            <input type="text" id="gbName" name="name" class="form-input" required placeholder="你的名字" maxlength="30">
+          </div>
+          <div class="form-row">
+            <div class="form-group">
+              <label class="form-label" for="gbEmail">邮箱</label>
+              <input type="email" id="gbEmail" name="email" class="form-input" placeholder="your@email.com">
+            </div>
+            <div class="form-group">
+              <label class="form-label" for="gbWebsite">网站</label>
+              <input type="url" id="gbWebsite" name="website" class="form-input" placeholder="https://">
+            </div>
+          </div>
+          <div class="form-group">
+            <label class="form-label" for="gbContent">留言内容 *</label>
+            <textarea id="gbContent" name="content" class="form-textarea" required placeholder="写下你想说的话..." rows="5" maxlength="1000"></textarea>
+            <div class="form-counter"><span id="charCount">0</span>/1000</div>
+          </div>
+          <button type="submit" class="btn btn-primary" id="gbSubmitBtn">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="22" y1="2" x2="11" y2="13"/><polygon points="22 2 15 22 11 13 2 9 22 2"/></svg>
+            发送留言
+          </button>
+        </form>
+      </div>
+
+      <!-- 留言列表 -->
+      <div class="guestbook-messages" data-reveal>
+        <h2 class="guestbook-messages-title">
+          全部留言
+          <span class="comment-count"><%= messages.length %></span>
+        </h2>
+
+        <div class="messages-list" id="messagesList">
+          <% if (messages.length > 0) { %>
+            <% messages.forEach(function(msg) { %>
+            <div class="message-item">
+              <div class="message-avatar">
+                <span class="message-avatar-text"><%= msg.name.charAt(0) %></span>
+              </div>
+              <div class="message-body">
+                <div class="message-header">
+                  <strong class="message-name"><%= msg.name %></strong>
+                  <% if (msg.website) { %>
+                    <a href="<%= msg.website %>" target="_blank" rel="noopener" class="message-website">🔗 网站</a>
+                  <% } %>
+                  <time class="message-time"><%= new Date(msg.createdAt).toLocaleDateString('zh-CN', { year: 'numeric', month: 'long', day: 'numeric', hour: '2-digit', minute: '2-digit' }) %></time>
+                </div>
+                <p class="message-content"><%= msg.content %></p>
+              </div>
+            </div>
+            <% }) %>
+          <% } else { %>
+          <div class="empty-state">
+            <div class="empty-icon">💭</div>
+            <h3>还没有留言</h3>
+            <p>来写下第一条留言吧</p>
+          </div>
+          <% } %>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+  // 字数统计
+  const contentArea = document.getElementById('gbContent');
+  const charCount = document.getElementById('charCount');
+  if (contentArea && charCount) {
+    contentArea.addEventListener('input', function() {
+      charCount.textContent = this.value.length;
+    });
+  }
+
+  // 留言提交
+  const form = document.getElementById('guestbookForm');
+  if (!form) return;
+
+  form.addEventListener('submit', function(e) {
+    e.preventDefault();
+    const btn = document.getElementById('gbSubmitBtn');
+    btn.disabled = true;
+    btn.innerHTML = '发送中...';
+
+    fetch('/api/guestbook', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({
+        name: document.getElementById('gbName').value,
+        email: document.getElementById('gbEmail').value,
+        website: document.getElementById('gbWebsite').value,
+        content: document.getElementById('gbContent').value
+      })
+    }).then(r => r.json()).then(data => {
+      if (data.error) {
+        alert(data.error);
+        btn.disabled = false;
+        btn.innerHTML = '发送留言';
+        return;
+      }
+      // 重新加载页面
+      location.reload();
+    }).catch(() => {
+      alert('发送失败，请稍后重试');
+      btn.disabled = false;
+      btn.innerHTML = '发送留言';
+    });
+  });
+});
+</script>
+
+<%- include('partials/footer') %>
+</body>
+</html>

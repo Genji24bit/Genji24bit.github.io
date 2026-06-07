@@ -1,0 +1,26 @@
+[
+  {
+    "id": "m1-x1y2z3",
+    "name": "访客小明",
+    "email": "visitor@example.com",
+    "website": "",
+    "content": "这个博客的设计太棒了！暗色主题非常高级，加载速度也很快。期待更多优质内容！",
+    "createdAt": "2026-06-05T20:30:00.000Z"
+  },
+  {
+    "id": "m2-a4b5c6",
+    "name": "设计爱好者",
+    "email": "",
+    "website": "https://example.com",
+    "content": "非常欣赏这里的字体排版和配色方案。请问你使用的字体是 Inter 吗？",
+    "createdAt": "2026-06-03T15:20:00.000Z"
+  },
+  {
+    "id": "m3-d7e8f9",
+    "name": "技术小白",
+    "email": "learner@test.com",
+    "website": "",
+    "content": "感谢分享的 Node.js 教程！按照你的指南我也搭建了自己的博客，过程非常顺利。",
+    "createdAt": "2026-05-30T11:10:00.000Z"
+  }
+]

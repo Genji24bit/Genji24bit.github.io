@@ -1,0 +1,46 @@
+[
+  {
+    "id": "r1-a1b2c3",
+    "title": "高级 CSS 样式模板库",
+    "description": "包含暗色主题设计系统、玻璃态卡片、渐变按钮等 50+ 常用的 CSS 组件和工具类。",
+    "category": "CSS",
+    "fileName": "premium-css-library.zip",
+    "filePath": "#",
+    "fileSize": 256000,
+    "downloads": 128,
+    "createdAt": "2026-06-01T08:00:00.000Z"
+  },
+  {
+    "id": "r2-d4e5f6",
+    "title": "图标素材包 - 简约线条风",
+    "description": "200+ 高质量 SVG 图标，涵盖日常开发中的常见场景，兼容暗色和亮色主题。",
+    "category": "设计资源",
+    "fileName": "minimal-icons.zip",
+    "filePath": "#",
+    "fileSize": 512000,
+    "downloads": 89,
+    "createdAt": "2026-05-25T10:30:00.000Z"
+  },
+  {
+    "id": "r3-g7h8i9",
+    "title": "个人博客启动模板",
+    "description": "基于 Express + EJS 的博客脚手架，包含完整的 SEO、评论和响应式设计。",
+    "category": "模板",
+    "fileName": "blog-template.zip",
+    "filePath": "#",
+    "fileSize": 1024000,
+    "downloads": 56,
+    "createdAt": "2026-05-20T14:00:00.000Z"
+  },
+  {
+    "id": "r4-j0k1l2",
+    "title": "前端性能优化检查清单",
+    "description": "一份全面的前端性能优化 checklist，涵盖加载性能、运行时性能、构建优化等各个方面。",
+    "category": "文档",
+    "fileName": "perf-checklist.pdf",
+    "filePath": "#",
+    "fileSize": 128000,
+    "downloads": 203,
+    "createdAt": "2026-05-10T09:00:00.000Z"
+  }
+]

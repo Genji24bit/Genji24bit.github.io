@@ -1,0 +1,14 @@
+{
+  "enabled": true,
+  "repo": "Genji24bit/Genji24bit.github.io",
+  "repoId": "R_kgDOSziSBw",
+  "category": "Announcements",
+  "categoryId": "DIC_kwDOSziSB84C-sMz",
+  "mapping": "pathname",
+  "strict": "0",
+  "reactions": "1",
+  "metadata": "0",
+  "inputPosition": "top",
+  "theme": "dark",
+  "lang": "zh-CN"
+}

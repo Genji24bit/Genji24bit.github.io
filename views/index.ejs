@@ -1,0 +1,187 @@
+<%- include('partials/head', { pageTitle: '' }) %>
+
+<!-- ===== 英雄区 ===== -->
+<section class="hero" id="hero">
+  <div class="container">
+    <div class="hero-content">
+      <!-- 装饰性光晕 -->
+      <div class="hero-glow"></div>
+
+      <!-- 头像 -->
+      <div class="hero-avatar-wrapper">
+        <div class="hero-avatar-ring">
+          <div class="hero-avatar-ring-inner"></div>
+        </div>
+        <img src="<%= site.avatar %>" alt="<%= site.title %>" class="hero-avatar" id="heroAvatar">
+      </div>
+
+      <!-- 标题 -->
+      <h1 class="hero-title">
+        <span class="hero-title-line hero-title-greeting" data-reveal>你好，我是</span>
+        <span class="hero-title-line hero-title-name" data-reveal><%= site.title %></span>
+        <span class="hero-title-line hero-title-sub" data-reveal><%= site.subtitle %></span>
+      </h1>
+
+      <p class="hero-desc" data-reveal><%= site.description %></p>
+
+      <!-- CTA 按钮 -->
+      <div class="hero-actions" data-reveal>
+        <a href="/blog" class="btn btn-primary">
+          浏览博客
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
+        </a>
+        <a href="/about" class="btn btn-ghost">
+          了解更多
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
+        </a>
+      </div>
+
+      <!-- 实时时钟 -->
+      <div class="hero-clock" data-reveal>
+        <div class="hero-clock-display" id="heroClock">
+          <span class="hero-clock-time">--:--:--</span>
+          <span class="hero-clock-date">----年--月--日 星期-</span>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- 滚动指示器 -->
+  <div class="scroll-indicator">
+    <span class="scroll-text">向下滚动</span>
+    <div class="scroll-line"></div>
+  </div>
+</section>
+
+<!-- ===== 精选博客 ===== -->
+<section class="section" id="featured-posts">
+  <div class="container">
+    <div class="section-header" data-reveal>
+      <span class="section-tag">Recent</span>
+      <h2 class="section-title">最新文章</h2>
+      <p class="section-desc">思考和记录的沉淀</p>
+    </div>
+
+    <% if (posts.length > 0) { %>
+    <div class="posts-grid">
+      <% posts.forEach(function(post, i) { %>
+      <article class="post-card" data-reveal data-delay="<%= i * 100 %>">
+        <a href="/blog/<%= post.id %>" class="post-card-link">
+          <% if (post.coverImage) { %>
+          <div class="post-card-image">
+            <img src="<%= post.coverImage %>" alt="<%= post.title %>" loading="lazy">
+          </div>
+          <% } else { %>
+          <div class="post-card-image post-card-image-placeholder">
+            <span>✦</span>
+          </div>
+          <% } %>
+          <div class="post-card-body">
+            <% if (post.tags && post.tags.length > 0) { %>
+            <div class="post-card-tags">
+              <% post.tags.slice(0, 2).forEach(function(tag) { %>
+                <span class="tag"><%= tag %></span>
+              <% }) %>
+            </div>
+            <% } %>
+            <h3 class="post-card-title"><%= post.title %></h3>
+            <p class="post-card-excerpt"><%= post.excerpt || '' %></p>
+            <div class="post-card-meta">
+              <time datetime="<%= post.createdAt %>"><%= new Date(post.createdAt).toLocaleDateString('zh-CN', { year: 'numeric', month: 'long', day: 'numeric' }) %></time>
+              <span class="post-card-views">👁 <%= post.views || 0 %> 阅读</span>
+            </div>
+          </div>
+        </a>
+      </article>
+      <% }) %>
+    </div>
+
+    <% if (posts.length >= 4) { %>
+    <div class="section-footer" data-reveal>
+      <a href="/blog" class="btn btn-outline">
+        查看全部文章
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
+      </a>
+    </div>
+    <% } %>
+    <% } else { %>
+    <div class="empty-state" data-reveal>
+      <div class="empty-icon">📝</div>
+      <h3>还没有文章</h3>
+      <p>第一篇精彩内容即将发布，敬请期待</p>
+    </div>
+    <% } %>
+  </div>
+</section>
+
+<!-- ===== 精选资源 ===== -->
+<section class="section section-alt" id="featured-resources">
+  <div class="container">
+    <div class="section-header" data-reveal>
+      <span class="section-tag">Resources</span>
+      <h2 class="section-title">精选资源</h2>
+      <p class="section-desc">实用工具与学习资料免费下载</p>
+    </div>
+
+    <% if (resources.length > 0) { %>
+    <div class="resources-grid">
+      <% resources.forEach(function(res, i) { %>
+      <div class="resource-card" data-reveal data-delay="<%= i * 100 %>">
+        <div class="resource-card-icon">
+          <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="12" y1="18" x2="12" y2="12"/><line x1="9" y1="15" x2="15" y2="15"/></svg>
+        </div>
+        <h3 class="resource-card-title"><%= res.title %></h3>
+        <p class="resource-card-desc"><%= res.description || '' %></p>
+        <div class="resource-card-meta">
+          <span class="resource-card-size"><%= res.fileSize ? (res.fileSize / 1024 / 1024).toFixed(1) + ' MB' : '' %></span>
+          <span class="resource-card-dl">⬇ <%= res.downloads || 0 %></span>
+        </div>
+      </div>
+      <% }) %>
+    </div>
+    <div class="section-footer" data-reveal>
+      <a href="/resources" class="btn btn-outline">
+        查看全部资源
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
+      </a>
+    </div>
+    <% } else { %>
+    <div class="empty-state" data-reveal>
+      <div class="empty-icon">📦</div>
+      <h3>资源准备中</h3>
+      <p>实用资源即将上线，敬请关注</p>
+    </div>
+    <% } %>
+  </div>
+</section>
+
+<!-- ===== 统计数据 ===== -->
+<section class="section stats-section">
+  <div class="container">
+    <div class="stats-grid" data-reveal>
+      <div class="stat-item">
+        <span class="stat-number" data-count="<%= posts.length || 0 %>"><%= posts.length || 0 %></span>
+        <span class="stat-label">文章</span>
+      </div>
+      <div class="stat-item">
+        <span class="stat-number" data-count="<%= resources.length || 0 %>"><%= resources.length || 0 %></span>
+        <span class="stat-label">资源</span>
+      </div>
+      <div class="stat-item">
+        <span class="stat-number" id="visitorCount">--</span>
+        <span class="stat-label">访客</span>
+      </div>
+      <div class="stat-item">
+        <div class="stat-clock" id="statClock">
+          <span class="stat-clock-time">--:--</span>
+          <span class="stat-clock-seconds">--</span>
+        </div>
+        <span class="stat-label">北京时间</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<%- include('partials/footer') %>
+</body>
+</html>

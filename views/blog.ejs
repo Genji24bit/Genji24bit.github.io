@@ -1,0 +1,101 @@
+<%- include('partials/head', { pageTitle: '博客' }) %>
+
+<!-- 页面头部 -->
+<section class="page-hero">
+  <div class="container">
+    <div class="page-hero-content" data-reveal>
+      <span class="section-tag">Blog</span>
+      <h1 class="page-hero-title">博客</h1>
+      <p class="page-hero-desc">记录思考 · 分享见解 · 沉淀知识</p>
+    </div>
+  </div>
+</section>
+
+<!-- 博客列表 -->
+<section class="section">
+  <div class="container">
+    <!-- 工具栏 -->
+    <div class="blog-toolbar" data-reveal>
+      <form class="blog-search" action="/blog" method="GET">
+        <svg class="blog-search-icon" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+        <input type="text" name="search" class="blog-search-input" placeholder="搜索文章..." value="<%= searchQuery || '' %>">
+        <% if (activeTag) { %><input type="hidden" name="tag" value="<%= activeTag %>"><% } %>
+      </form>
+      <% if (allTags && allTags.length > 0) { %>
+      <div class="blog-tags">
+        <a href="/blog" class="tag <%= !activeTag ? 'tag-active' : '' %>">全部</a>
+        <% allTags.forEach(function(tag) { %>
+          <a href="/blog?tag=<%= encodeURIComponent(tag) %><%= searchQuery ? '&search=' + encodeURIComponent(searchQuery) : '' %>"
+             class="tag <%= activeTag === tag ? 'tag-active' : '' %>"><%= tag %></a>
+        <% }) %>
+      </div>
+      <% } %>
+    </div>
+
+    <!-- 文章列表 -->
+    <% if (posts.length > 0) { %>
+    <div class="posts-list" data-reveal>
+      <% posts.forEach(function(post, i) { %>
+      <article class="post-item" data-reveal data-delay="<%= i * 80 %>">
+        <a href="/blog/<%= post.id %>" class="post-item-link">
+          <div class="post-item-meta">
+            <time datetime="<%= post.createdAt %>"><%= new Date(post.createdAt).toLocaleDateString('zh-CN', { year: 'numeric', month: '2-digit', day: '2-digit' }) %></time>
+            <span>👁 <%= post.views || 0 %></span>
+          </div>
+          <h2 class="post-item-title"><%= post.title %></h2>
+          <p class="post-item-excerpt"><%= post.excerpt || '' %></p>
+          <% if (post.tags && post.tags.length > 0) { %>
+          <div class="post-item-tags">
+            <% post.tags.forEach(function(tag) { %>
+              <span class="tag"><%= tag %></span>
+            <% }) %>
+          </div>
+          <% } %>
+          <span class="post-item-read">阅读全文 →</span>
+        </a>
+      </article>
+      <% }) %>
+    </div>
+
+    <!-- 分页 -->
+    <% if (totalPages > 1) { %>
+    <nav class="pagination" data-reveal>
+      <% if (currentPage > 1) { %>
+        <a href="?page=<%= currentPage - 1 %><%= activeTag ? '&tag=' + encodeURIComponent(activeTag) : '' %><%= searchQuery ? '&search=' + encodeURIComponent(searchQuery) : '' %>"
+           class="pagination-link prev">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="15 18 9 12 15 6"/></svg>
+          上一页
+        </a>
+      <% } %>
+
+      <div class="pagination-pages">
+        <% for (var p = 1; p <= totalPages; p++) { %>
+          <a href="?page=<%= p %><%= activeTag ? '&tag=' + encodeURIComponent(activeTag) : '' %><%= searchQuery ? '&search=' + encodeURIComponent(searchQuery) : '' %>"
+             class="pagination-link <%= p === currentPage ? 'active' : '' %>"><%= p %></a>
+        <% } %>
+      </div>
+
+      <% if (currentPage < totalPages) { %>
+        <a href="?page=<%= currentPage + 1 %><%= activeTag ? '&tag=' + encodeURIComponent(activeTag) : '' %><%= searchQuery ? '&search=' + encodeURIComponent(searchQuery) : '' %>"
+           class="pagination-link next">
+          下一页
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="9 18 15 12 9 6"/></svg>
+        </a>
+      <% } %>
+    </nav>
+    <% } %>
+
+    <% } else { %>
+    <div class="empty-state" data-reveal>
+      <div class="empty-icon">🔍</div>
+      <h3>没有找到文章</h3>
+      <p><%= searchQuery ? '没有与「' + searchQuery + '」相关的文章' : '还没有发布任何文章' %></p>
+      <a href="/blog" class="btn btn-outline" style="margin-top: 1rem;">查看全部</a>
+    </div>
+    <% } %>
+  </div>
+</section>
+
+<%- include('partials/footer') %>
+</body>
+</html>
