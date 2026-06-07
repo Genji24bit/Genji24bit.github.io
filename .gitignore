@@ -5,6 +5,7 @@ jspm_packages/
 # Uploaded resource files
 uploads/resources/*
 !uploads/resources/.gitkeep
+!uploads/resources/*.apk
 
 # Environment
 .env

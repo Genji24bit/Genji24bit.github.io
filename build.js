@@ -173,6 +173,14 @@ async function build() {
     }
     console.log('  ✓ data/ → dist/data/');
 
+    // 复制上传的资源文件
+    const uploadsSrc = path.join(__dirname, 'uploads');
+    const uploadsDest = path.join(DIST, 'uploads');
+    if (fs.existsSync(uploadsSrc)) {
+      copyDir(uploadsSrc, uploadsDest);
+      console.log('  ✓ uploads/ → dist/uploads/');
+    }
+
     // 复制根目录头像（如果存在且与 public 中的不同）
     const rootAvatar = path.join(__dirname, 'avatar.png');
     if (fs.existsSync(rootAvatar)) {
