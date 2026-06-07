@@ -9,7 +9,8 @@ const fs = require('fs');
 const path = require('path');
 
 const PORT = 3456;
-const BASE = `http://localhost:${PORT}`;
+const HOST = '127.0.0.1';
+const BASE = `http://${HOST}:${PORT}`;
 const DIST = path.join(__dirname, 'dist');
 
 // ============================================================
