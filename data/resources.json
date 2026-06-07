@@ -1,5 +1,17 @@
 [
   {
+    "id": "r5-apk-v1",
+    "title": "装维助手APP V1.0（无装维功能版本）",
+    "description": "宽带装维辅助工具APK安装包。包含二维码扫描、设备信息识别、WiFi分析、备忘录等功能。此版本暂未集成装维业务功能。",
+    "category": "APK",
+    "fileName": "装维助手_V1.0.apk",
+    "filePath": "/uploads/resources/装维助手_V1.0.apk",
+    "fileSize": 28769676,
+    "downloads": 0,
+    "createdAt": "2026-06-07T14:00:00.000Z"
+  },
+  {
+  {
     "id": "r1-a1b2c3",
     "title": "高级 CSS 样式模板库",
     "description": "包含暗色主题设计系统、玻璃态卡片、渐变按钮等 50+ 常用的 CSS 组件和工具类。",
