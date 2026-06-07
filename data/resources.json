@@ -5,8 +5,8 @@
     "description": "宽带装维辅助工具APK安装包。包含二维码扫描、设备信息识别、WiFi分析、备忘录等功能。此版本暂未集成装维业务功能。",
     "category": "APK",
     "fileName": "装维助手_V1.0.apk",
-    "filePath": "/uploads/resources/装维助手_V1.0.apk",
-    "fileSize": 28769676,
+    "filePath": "https://github.com/Genji24bit/BroadbandTool/releases/download/V10.0.0/default.apk",
+    "fileSize": 27195052,
     "downloads": 0,
     "createdAt": "2026-06-07T14:00:00.000Z"
   },
